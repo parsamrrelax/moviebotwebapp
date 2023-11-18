@@ -1,6 +1,4 @@
 {
-    "packages": ["sqlite3", "fuzzywuzzy"],
-    
-    "database_path": "/home/parsa/bots/moviebotwebapp/data.db"
-      
+    "packages": ["requests"]
+          
 }
