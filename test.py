@@ -1,7 +1,7 @@
 import requests
 
 def movies_search(user_input):
-    api_url = "http://main.khorsander.fun:5000/search_movies"
+    api_url = "https://main.khorsander.fun/search_movies"
     data = {"user_input": user_input}
     response = requests.post(api_url, json=data)
     if response.status_code == 200:
