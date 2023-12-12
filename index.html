@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Search</title>
+    <title>Search App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Movie Search</h1>
-    <label for="searchInput">Enter Movie Name:</label>
-    <input type="text" id="searchInput">
-    <button onclick="searchMovies()">Search</button>
-    <div id="results"></div>
+    <div class="tabs">
+        <button onclick="switchTab('movies')">Movies</button>
+        <button onclick="switchTab('tv')">TV Shows</button>
+    </div>
+    <div id="moviesTab" class="tab-content">
+        <h1>Movie Search</h1>
+        <label for="searchInputMovies">Enter Movie Name:</label>
+        <input type="text" id="searchInputMovies" placeholder="Movie Name">
+        <button onclick="searchMovies()">Search</button>
+        <div id="resultsMovies"></div>
+    </div>
+    <div id="tvTab" class="tab-content" style="display: none;">
+        <h1>TV Show Search</h1>
+        <label for="searchInputTV">Enter TV Show Name:</label>
+        <input type="text" id="searchInputTV" placeholder="TV Name">
+        <input type="number" id="searchInputSeason" placeholder="Season Number">
+        <button onclick="searchSeries()">Search</button>
+        <div id="resultsTV"></div>
+    </div>
 
+    <script src="script.js" defer></script>
     <script>
-        function searchMovies() {
-            // Get user input
-            var userInput = document.getElementById("searchInput").value;
-
-            // Make a POST request to the Flask API
-            fetch("http://5.42.87.92:5000/search_movies", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ "user_input": userInput })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Display the results
-                document.getElementById("results").innerText = data.results;
-            })
-            .catch(error => console.error("Error:", error));
+        function switchTab(tabName) {
+            document.getElementById('moviesTab').style.display = (tabName === 'movies') ? 'block' : 'none';
+            document.getElementById('tvTab').style.display = (tabName === 'tv') ? 'block' : 'none';
+            document.getElementById('resultsMovies').innerText = '';
+            document.getElementById('resultsTV').innerText = '';
         }
     </script>
 </body>
